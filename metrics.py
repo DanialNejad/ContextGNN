@@ -49,7 +49,9 @@ def auprc(true: NDArray[np.float64], pred: NDArray[np.float64]) -> float:
     precision, recall, _ = skm.precision_recall_curve(true, pred)
     return skm.auc(recall, precision)
 
-
+def recall1(true: NDArray[np.float64], pred: NDArray[np.float64]) -> float:
+    assert pred.ndim == 1 or pred.shape[1] == 1
+    return skm.recall_score(true, pred, average="binary")
 ### applicable to multiclass classification only
 
 
@@ -209,3 +211,4 @@ def link_prediction_top(
     top_k_accuracy = bought_from_recommendations.mean()
 
     return top_k_accuracy
+
